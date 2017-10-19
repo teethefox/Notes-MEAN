@@ -1,31 +1,16 @@
-var messages = require('../controllers/notescontroller.js');
+var notes = require('../controllers/notescontroller.js');
 module.exports = function(app) {
+
+  app.get('/notes', (req, res, next)=>{
+    console.log("express get route is working")
+    notes.index(req, res)
+  });
+
+  app.post('/notes', (req, res, next)=>{
+    console.log("node route create");
+    console.log(req.body)
+    notes.create(req, res);
+  });
+} 
+
     
-    
-
-
-app.get('/', function(req, res) {  
-messages.show(req,res)   
- })
-app.get('/notes/:id', function(req, res){
-    messages.showsingle(req, res)
-  })
-  
-app.get('/new', function(req, res){
- messages.getnew(req, res)
-})
-// Add User Request 
-app.post('/notes', function(req, res) {
- messages.add(req, res)
-})
-app.get('/notes/edit/:id', function(req,res){
-messages.edit(req, res)
-})
-app.post('/notes/update/:id', function(req,res){
- messages.update(req, res)
-    })
-
-app.post('/notes/destroy/:id', function(req, res){
- messages.destroy(req, res)
-})
-}
